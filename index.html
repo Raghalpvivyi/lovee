@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>فيلم حب</title>
+
+<style>
+body{
+margin:0;
+padding:0;
+background:black;
+font-family:Arial;
+color:white;
+overflow:hidden;
+text-align:center;
+}
+
+#intro{
+position:absolute;
+width:100%;
+height:100%;
+background:black;
+display:flex;
+justify-content:center;
+align-items:center;
+flex-direction:column;
+z-index:10;
+}
+
+#enterBtn{
+padding:18px 40px;
+font-size:22px;
+border:none;
+border-radius:40px;
+background:#ff004c;
+color:white;
+cursor:pointer;
+margin-top:20px;
+}
+
+#movie{
+display:none;
+position:absolute;
+width:100%;
+height:100%;
+}
+
+video{
+position:absolute;
+width:100%;
+height:100%;
+object-fit:cover;
+opacity:0.35;
+}
+
+.overlay{
+position:absolute;
+width:100%;
+height:100%;
+background:linear-gradient(to top,black,transparent);
+}
+
+.content{
+position:absolute;
+top:50%;
+left:50%;
+transform:translate(-50%,-50%);
+width:90%;
+}
+
+#herName{
+font-size:55px;
+color:#ff2a6d;
+text-shadow:0 0 20px #ff2a6d;
+}
+
+#countdown{
+font-size:30px;
+margin-top:20px;
+}
+
+img{
+width:240px;
+border-radius:20px;
+margin-top:25px;
+box-shadow:0 0 40px #ff2a6d;
+}
+
+.message{
+margin-top:25px;
+font-size:24px;
+line-height:1.8;
+opacity:0;
+transition:3s;
+}
+</style>
+</head>
+
+<body>
+
+<!-- البداية -->
+<div id="intro">
+<h1>لديك فيلم خاص بكِ فقط ❤️</h1>
+<button id="enterBtn" onclick="startFilm()">ابدئي المشاهدة</button>
+</div>
+
+<!-- الفيلم -->
+<div id="movie">
+
+<video autoplay muted loop>
+<source src="https://cdn.coverr.co/videos/coverr-romantic-couple-1563/1080p.mp4">
+</video>
+<div class="overlay"></div>
+
+<div class="content">
+<div id="herName">اسمها هنا</div>
+<div id="countdown"></div>
+
+<img src="her.jpg">
+
+<div class="message" id="finalMsg">
+من يوم عرفتك…  
+وأنا متأكد إن أجمل أقداري كانت أنتِ.  
+مو بس أحبك…  
+أنا أشوف العالم بعيونك.  
+عيد حب سعيد يا كل حياتي ❤️
+</div>
+</div>
+</div>
+
+<audio id="voice" src="voice.mp3"></audio>
+<audio id="song" src="song.mp3"></audio>
+
+<script>
+
+function startFilm(){
+document.getElementById("intro").style.display="none";
+document.getElementById("movie").style.display="block";
+
+let c=5;
+let timer=setInterval(()=>{
+document.getElementById("countdown").innerHTML="الفيلم يبدأ بعد "+c;
+c--;
+if(c<0){
+clearInterval(timer);
+document.getElementById("countdown").innerHTML="اسمعي الرسالة...";
+playVoice();
+}
+},1000);
+}
+
+function playVoice(){
+let v=document.getElementById("voice");
+v.play();
+
+v.onended=function(){
+document.getElementById("finalMsg").style.opacity=1;
+playSong();
+}
+}
+
+function playSong(){
+document.getElementById("song").play();
+}
+
+</script>
+
+</body>
+</html>
